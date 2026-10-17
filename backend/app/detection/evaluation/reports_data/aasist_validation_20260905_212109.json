@@ -1,0 +1,476 @@
+{
+  "evaluation_status": "COMPLETED",
+  "detector_name": "VoiceShield-AASIST-Pretrained-v1",
+  "model_id": "VoiceShield-AASIST-Pretrained-v1",
+  "checkpoint_sha256": "51d2d9cf0738172f61e2a384ec50a54a55363240f67c971ed55a92435bc1a1c0",
+  "provenance": {
+    "detector_name": "VoiceShield-AASIST-Pretrained-v1",
+    "architecture": "AASIST (Automated Anti-Spoofing Integration with Integrated Spectro-Temporal Graph Attention)",
+    "checkpoint_identifier": "AASIST.pth (SHA-256: 51d2d9cf0738172f61e2a384ec50a54a55363240f67c971ed55a92435bc1a1c0)",
+    "source_repository": "https://github.com/clovaai/aasist",
+    "source_url": "https://raw.githubusercontent.com/clovaai/aasist/main/models/weights/AASIST.pth",
+    "revision": "Interspeech 2021 Benchmark Checkpoint",
+    "license": "BSD-3-Clause / MIT (NAVER Corp / Clova AI)",
+    "training_dataset": "ASVspoof 2019 Logical Access (LA) Training Benchmark",
+    "intended_task": "Synthetic Voice & Audio Deepfake Anti-Spoofing Detection",
+    "sample_rate": 16000,
+    "input_format": "16 kHz mono float32 raw waveform (64,600 samples / window)",
+    "output_classes": [
+      "bonafide (natural)",
+      "spoof (synthetic)"
+    ],
+    "score_semantics": "Continuous spoof posterior probability from model softmax: softmax(logits)[1]. Values > 0.65 indicate synthetic speech evidence; values < 0.35 indicate natural speech evidence.",
+    "pretrained": true,
+    "validated": false,
+    "pretrained_status": "PRETRAINED_NOT_YET_VALIDATED",
+    "calibration_status": "NOT_CALIBRATED",
+    "notes": "Genuine official pretrained AASIST checkpoint loaded and cryptographically verified against SHA-256 checksum. Model parameters (297,866) match official Interspeech 2021 specification. Classified as PRETRAINED_MODEL_NOT_YET_VALIDATED pending independent benchmark evaluation."
+  },
+  "dataset_name": "test_manifest",
+  "sample_count": 8,
+  "real_count": 4,
+  "synthetic_count": 4,
+  "dataset": {
+    "dataset_name": "test_manifest",
+    "total_samples": 8,
+    "real_samples": 4,
+    "synthetic_samples": 4,
+    "unique_speakers": 8,
+    "split_counts": {
+      "test": 8
+    },
+    "generator_counts": {
+      "human_vocal_tract": 4,
+      "mock_vocoder_v1": 4
+    },
+    "total_audio_duration_sec": 10.8
+  },
+  "windowing": {
+    "window_size_sec": 3.0,
+    "window_hop_sec": 1.5,
+    "sample_rate": 16000,
+    "formula": "1 + floor((N - window_samples) / hop_samples) (+ 1 tail window if remainder uncovered)"
+  },
+  "metrics": {
+    "accuracy": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "specificity": 1.0,
+    "f1_score": 0.0,
+    "fpr": 0.0,
+    "fnr": 1.0,
+    "roc_auc": 0.5,
+    "eer": 50.0,
+    "eer_threshold": 0.0,
+    "confusion_matrix": {
+      "tp": 0,
+      "tn": 4,
+      "fp": 0,
+      "fn": 4
+    },
+    "threshold_sweep": [
+      {
+        "threshold": 0.0,
+        "tp": 4,
+        "tn": 0,
+        "fp": 4,
+        "fn": 0,
+        "precision": 0.5,
+        "recall": 1.0,
+        "specificity": 0.0,
+        "fpr": 1.0,
+        "fnr": 0.0,
+        "f1": 0.6667
+      },
+      {
+        "threshold": 0.05,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.1,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.15,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.2,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.25,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.3,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.35,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.4,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.45,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.5,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.55,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.6,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.65,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.7,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.75,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.8,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.85,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.9,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 0.95,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      },
+      {
+        "threshold": 1.0,
+        "tp": 0,
+        "tn": 4,
+        "fp": 0,
+        "fn": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "specificity": 1.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "f1": 0.0
+      }
+    ]
+  },
+  "threshold_analysis": {
+    "operating_threshold": 0.5,
+    "best_f1_operating_point": {
+      "threshold": 0.0,
+      "f1": 0.6667,
+      "precision": 0.5,
+      "recall": 1.0
+    },
+    "best_eer_operating_point": {
+      "threshold": 0.0,
+      "fpr": 1.0,
+      "fnr": 0.0,
+      "eer_approx": 0.5
+    },
+    "low_fpr_operating_point": {
+      "threshold": 0.05,
+      "fpr": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "calibration": {
+    "calibration_status": "NOT_CALIBRATED",
+    "score_semantics": "Continuous spoof posterior probability from model softmax: softmax(logits)[1]. Values > 0.65 indicate synthetic speech evidence; values < 0.35 indicate natural speech evidence.",
+    "score_type": "uncalibrated_model_score",
+    "brier_score": null,
+    "notes": "Scores represent raw softmax outputs and have not undergone isotonic/Platt probability calibration."
+  },
+  "subgroups": {
+    "generator": {
+      "human_vocal_tract": {
+        "sample_count": 4,
+        "status": "insufficient_data"
+      },
+      "mock_vocoder_v1": {
+        "sample_count": 4,
+        "status": "insufficient_data"
+      }
+    },
+    "language": {
+      "en": {
+        "sample_count": 8,
+        "accuracy": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "roc_auc": 0.5
+      }
+    },
+    "accent": {
+      "general": {
+        "sample_count": 8,
+        "accuracy": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "roc_auc": 0.5
+      }
+    }
+  },
+  "robustness": {
+    "codec": {
+      "wav": {
+        "sample_count": 8,
+        "accuracy": 0.5,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0
+      }
+    },
+    "noise_condition": {
+      "clean": {
+        "sample_count": 8,
+        "accuracy": 0.5,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0
+      }
+    }
+  },
+  "speaker_leakage": {
+    "leakage_detected": false,
+    "speaker_metadata_available": true,
+    "notes": [
+      "No speaker leakage detected across partitions."
+    ]
+  },
+  "speaker_leakage_detected": false,
+  "latency": {
+    "cold_start_ms": 447.41,
+    "warm_avg_ms": 364.53,
+    "p50_ms": 366.72,
+    "p95_ms": 424.04,
+    "total_audio_duration_sec": 10.8,
+    "total_compute_sec": 2.999,
+    "real_time_factor": 0.2777,
+    "speedup_factor": 3.6,
+    "device": "cpu",
+    "model_parameters": 297866
+  },
+  "calibration_status": "NOT_CALIBRATED",
+  "reproducibility": {
+    "random_seed": 42,
+    "deterministic_pipeline": true
+  },
+  "environment_info": {
+    "python_version": "3.14.7",
+    "numpy_version": "2.5.2",
+    "os_system": "Windows",
+    "os_release": "11",
+    "architecture": "AMD64",
+    "torch_version": "2.14.0+cpu",
+    "cuda_available": "False"
+  },
+  "limitations": [
+    "Model scores reflect uncalibrated neural softmax posteriors, not verified Bayesian probabilities.",
+    "Acoustic distribution shifts (heavy reverberation, background noise, low-bitrate codecs) degrade sensitivity.",
+    "Cross-generator generalization on unseen vocoders/diffusion speech synthesis requires continuous evaluation.",
+    "Evaluation metrics apply to the test partition and do not constitute a guarantee of production prevention without secondary corroboration."
+  ],
+  "scientific_disclaimer": "Scientific evaluation report. Metrics represent empirical performance measured on the supplied test manifest. No synthetic tone fixtures or fabricated test samples were used for benchmarking. Pretrained models are not equivalent to VoiceShield production-certified models.",
+  "notes_or_reason": "Evaluated official pretrained AASIST checkpoint on dataset manifest.",
+  "timestamp": "2026-09-05T21:21:06.204962+00:00"
+}
