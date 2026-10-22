@@ -22,13 +22,87 @@ RECOMMENDED_TOTAL_DURATION_S = 10.0
 MAX_TOTAL_DURATION_S = 120.0
 
 
+from pathlib import Path
+import json
+
 class SpeakerEnrollmentManager:
     """
-    Manages in-memory speaker enrollment profiles and centroid embedding aggregation.
+    Manages speaker enrollment profiles, centroid embedding aggregation,
+    and local persistent storage across backend restarts.
     """
-    def __init__(self, encoder: BaseSpeakerEncoder):
+    def __init__(self, encoder: BaseSpeakerEncoder, storage_dir: Optional[Path] = None):
         self.encoder = encoder
         self._profiles: Dict[str, Dict[str, Any]] = {}
+        self.storage_dir = storage_dir
+        if self.storage_dir is not None:
+            self.storage_dir.mkdir(parents=True, exist_ok=True)
+            self._load_persisted_profiles()
+
+    def _load_persisted_profiles(self) -> None:
+        """
+        Loads all persisted speaker profiles from the storage directory.
+        """
+        if not self.storage_dir or not self.storage_dir.exists():
+            return
+
+        for meta_path in self.storage_dir.glob("*.json"):
+            try:
+                with open(meta_path, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
+                profile_id = meta.get("profile_id")
+                emb_filename = meta.get("embedding_file")
+                if not profile_id or not emb_filename:
+                    continue
+
+                emb_path = self.storage_dir / emb_filename
+                if not emb_path.exists():
+                    logger.warning(f"Embedding file {emb_path} missing for profile {profile_id}")
+                    continue
+
+                emb = np.load(emb_path).astype(np.float32)
+                self._profiles[profile_id] = {
+                    "profile_id": profile_id,
+                    "model_id": meta.get("model_id", self.encoder.model_id),
+                    "embedding_dimension": meta.get("embedding_dimension", len(emb)),
+                    "embedding": emb,
+                    "sample_count": meta.get("sample_count", 1),
+                    "total_audio_duration_seconds": meta.get("total_audio_duration_seconds", 0.0),
+                    "created_at": meta.get("created_at"),
+                    "updated_at": meta.get("updated_at"),
+                    "in_memory_only": False,
+                }
+                logger.info(f"Loaded persisted speaker profile '{profile_id}' from {meta_path}")
+            except Exception as e:
+                logger.error(f"Failed loading persisted profile from {meta_path}: {e}")
+
+    def _persist_profile(self, profile_id: str, profile_data: Dict[str, Any]) -> None:
+        """
+        Persists profile metadata and embedding array to storage_dir.
+        """
+        if not self.storage_dir:
+            return
+
+        try:
+            emb_filename = f"{profile_id}.npy"
+            meta_filename = f"{profile_id}.json"
+
+            np.save(self.storage_dir / emb_filename, profile_data["embedding"])
+
+            meta = {
+                "profile_id": profile_id,
+                "model_id": profile_data["model_id"],
+                "embedding_dimension": profile_data["embedding_dimension"],
+                "embedding_file": emb_filename,
+                "sample_count": profile_data["sample_count"],
+                "total_audio_duration_seconds": profile_data["total_audio_duration_seconds"],
+                "created_at": profile_data["created_at"],
+                "updated_at": profile_data["updated_at"],
+            }
+            with open(self.storage_dir / meta_filename, "w", encoding="utf-8") as f:
+                json.dump(meta, f, indent=2)
+            logger.info(f"Persisted profile '{profile_id}' to {self.storage_dir}")
+        except Exception as e:
+            logger.error(f"Failed to persist profile '{profile_id}': {e}")
 
     def get_profile(self, profile_id: str) -> Optional[Dict[str, Any]]:
         """
@@ -58,10 +132,24 @@ class SpeakerEnrollmentManager:
 
     def delete_profile(self, profile_id: str) -> bool:
         """
-        Deletes an enrolled profile.
+        Deletes an enrolled profile from memory and disk.
         """
+        deleted = False
         if profile_id in self._profiles:
             del self._profiles[profile_id]
+            deleted = True
+
+        if self.storage_dir:
+            meta_path = self.storage_dir / f"{profile_id}.json"
+            emb_path = self.storage_dir / f"{profile_id}.npy"
+            if meta_path.exists():
+                meta_path.unlink()
+                deleted = True
+            if emb_path.exists():
+                emb_path.unlink()
+                deleted = True
+
+        if deleted:
             logger.info(f"Deleted speaker profile: {profile_id}")
             return True
         return False
@@ -153,8 +241,11 @@ class SpeakerEnrollmentManager:
             "total_audio_duration_seconds": round(total_duration, 2),
             "created_at": self._profiles[profile_id]["created_at"] if is_update else now_iso,
             "updated_at": now_iso,
-            "in_memory_only": True,
+            "in_memory_only": self.storage_dir is None,
         }
+
+        if self.storage_dir is not None:
+            self._persist_profile(profile_id, self._profiles[profile_id])
 
         logger.info(
             f"Enrolled profile '{profile_id}' ({len(audio_samples)} samples, {total_duration:.2f}s speech, "
@@ -178,7 +269,7 @@ class SpeakerEnrollmentManager:
             silence_ratio=0.0,
         )
 
-        privacy_meta = BiometricPrivacyPolicy.get_privacy_metadata(in_memory_only=True)
+        privacy_meta = BiometricPrivacyPolicy.get_privacy_metadata(in_memory_only=(self.storage_dir is None))
 
         return EnrollmentResponse(
             success=True,

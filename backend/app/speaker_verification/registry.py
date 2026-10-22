@@ -21,7 +21,11 @@ from app.speaker_verification.schemas import (
     ScoreType,
 )
 
+from pathlib import Path
+
 logger = logging.getLogger(__name__)
+
+DEFAULT_SPEAKER_PROFILES_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "speaker_profiles"
 
 
 class SpeakerVerificationService:
@@ -30,13 +34,13 @@ class SpeakerVerificationService:
     """
     _instance: Optional["SpeakerVerificationService"] = None
 
-    def __init__(self, encoder: Optional[BaseSpeakerEncoder] = None):
+    def __init__(self, encoder: Optional[BaseSpeakerEncoder] = None, storage_dir: Optional[Path] = DEFAULT_SPEAKER_PROFILES_DIR):
         self.encoder = encoder or SpeechBrainECAPAEncoder()
         self.similarity_metric = CosineSimilarityMetric()
         self.threshold_config = SpeakerVerificationThreshold()
         self.calibrator = SpeakerScoreCalibrator(self.threshold_config)
         self.decision_engine = SpeakerDecisionEngine(self.calibrator)
-        self.enrollment_manager = SpeakerEnrollmentManager(self.encoder)
+        self.enrollment_manager = SpeakerEnrollmentManager(self.encoder, storage_dir=storage_dir)
 
     @classmethod
     def get_instance(cls) -> "SpeakerVerificationService":

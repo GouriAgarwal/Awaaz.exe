@@ -59,9 +59,9 @@
     "f1_score": 0.6667,
     "fpr": 1.0,
     "fnr": 0.0,
-    "roc_auc": 0.6667,
-    "eer": 33.33,
-    "eer_threshold": 0.5264,
+    "roc_auc": 0.0,
+    "eer": 100.0,
+    "eer_threshold": 0.5066,
     "confusion_matrix": {
       "tp": 3,
       "tn": 0,
@@ -392,7 +392,7 @@
         "f1_score": 0.6667,
         "fpr": 1.0,
         "fnr": 0.0,
-        "roc_auc": 0.6667
+        "roc_auc": 0.0
       }
     },
     "accent": {
@@ -404,7 +404,7 @@
         "f1_score": 0.6667,
         "fpr": 1.0,
         "fnr": 0.0,
-        "roc_auc": 0.6667
+        "roc_auc": 0.0
       }
     }
   },
@@ -439,14 +439,14 @@
   },
   "speaker_leakage_detected": false,
   "latency": {
-    "cold_start_ms": 54.49,
-    "warm_avg_ms": 49.35,
-    "p50_ms": 49.43,
-    "p95_ms": 53.65,
+    "cold_start_ms": 171.96,
+    "warm_avg_ms": 45.09,
+    "p50_ms": 44.46,
+    "p95_ms": 141.68,
     "total_audio_duration_sec": 8.1,
-    "total_compute_sec": 0.301,
-    "real_time_factor": 0.0372,
-    "speedup_factor": 26.89,
+    "total_compute_sec": 0.397,
+    "real_time_factor": 0.0491,
+    "speedup_factor": 20.38,
     "device": "cpu",
     "model_parameters": 0
   },
@@ -456,12 +456,12 @@
     "deterministic_pipeline": true
   },
   "environment_info": {
-    "python_version": "3.14.7",
-    "numpy_version": "2.5.2",
+    "python_version": "3.12.6",
+    "numpy_version": "2.5.4",
     "os_system": "Windows",
     "os_release": "11",
     "architecture": "AMD64",
-    "torch_version": "2.14.0+cpu",
+    "torch_version": "2.14.1+cpu",
     "cuda_available": "False"
   },
   "limitations": [
@@ -472,5 +472,5 @@
   ],
   "scientific_disclaimer": "Scientific evaluation report. Metrics represent empirical performance measured on the supplied test manifest. No synthetic tone fixtures or fabricated test samples were used for benchmarking. Pretrained models are not equivalent to VoiceShield production-certified models.",
   "notes_or_reason": "Model audited as UNTRAINED_NEURAL_BASELINE (baseline parameters). Reported metrics reflect uncalibrated baseline behavior, not a trained production classifier.",
-  "timestamp": "2026-09-07T14:29:42.367065+00:00"
+  "timestamp": "2026-10-18T21:52:11.191844+00:00"
 }

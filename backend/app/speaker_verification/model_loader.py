@@ -50,16 +50,24 @@ class PretrainedSpeakerLoader:
                     f"Corrupted or mismatched weights at {path}. Expected {EXPECTED_SHA256}, got {actual_sha256}. Re-acquiring..."
                 )
 
-        # Fallback: attempt download from HuggingFace Hub
+        # Attempt download from HuggingFace
         path.parent.mkdir(parents=True, exist_ok=True)
         try:
-            from huggingface_hub import hf_hub_download
-            logger.info(f"Downloading {HF_REPO_ID}/{HF_FILENAME} via HuggingFace Hub...")
-            downloaded = hf_hub_download(repo_id=HF_REPO_ID, filename=HF_FILENAME)
-            import shutil
-            shutil.copyfile(downloaded, path)
+            try:
+                from huggingface_hub import hf_hub_download
+                logger.info(f"Downloading {HF_REPO_ID}/{HF_FILENAME} via HuggingFace Hub...")
+                downloaded = hf_hub_download(repo_id=HF_REPO_ID, filename=HF_FILENAME)
+                import shutil
+                shutil.copyfile(downloaded, path)
+            except ImportError:
+                import urllib.request
+                url = f"https://huggingface.co/{HF_REPO_ID}/resolve/main/{HF_FILENAME}"
+                logger.info(f"Downloading {url} via direct HTTP request...")
+                req = urllib.request.Request(url, headers={"User-Agent": "VoiceShield-App/1.0"})
+                with urllib.request.urlopen(req, timeout=120) as resp, open(path, "wb") as f:
+                    f.write(resp.read())
         except Exception as e:
-            logger.error(f"Failed to acquire weights from HuggingFace Hub: {e}")
+            logger.error(f"Failed to acquire weights from HuggingFace: {e}")
             raise FileNotFoundError(
                 f"ECAPA-TDNN checkpoint not found at {path} and could not be downloaded from {HF_REPO_ID}. Error: {e}"
             )
