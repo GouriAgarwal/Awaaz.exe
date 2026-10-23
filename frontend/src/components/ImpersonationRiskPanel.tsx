@@ -1097,7 +1097,7 @@ export function ImpersonationRiskPanel() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
                 <p className="text-[10px] uppercase font-bold text-slate-400">Fusion Engine</p>
-                <p className="text-sm font-bold text-white">{provenance?.fusion_engine || 'VoiceShield MultiModalFusionEngine'}</p>
+                <p className="text-sm font-bold text-white">{(provenance?.fusion_engine ? provenance.fusion_engine.replace(/VoiceShield/gi, 'Awaaz.exe') : 'Awaaz.exe MultiModalFusionEngine')}</p>
                 <p className="text-[10px] font-mono text-slate-500">Version: {provenance?.version || '1.0.0'}</p>
               </div>
 

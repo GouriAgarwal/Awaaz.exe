@@ -1374,7 +1374,7 @@ export function VoiceShieldCommandCenter() {
               <span>Enterprise &amp; Banking Deployment Touchpoints</span>
             </h3>
             <p className="text-xs text-slate-400">
-              VoiceShield deploys as a transparent streaming proxy or API sidecar across 4 major enterprise infrastructures.
+              Awaaz.exe deploys as a transparent streaming proxy or API sidecar across 4 major enterprise infrastructures.
             </p>
           </div>
           <span className="text-xs font-mono px-2.5 py-1 rounded bg-slate-800 text-slate-300">

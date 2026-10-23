@@ -356,11 +356,11 @@ export const OperationsDashboard: React.FC = () => {
               <div className="divide-y divide-slate-100 text-sm">
                 <div className="py-2.5 flex justify-between">
                   <span className="text-slate-500">Service Name</span>
-                  <span className="font-medium text-slate-900">VoiceShield API</span>
+                  <span className="font-medium text-slate-900">Awaaz.exe API</span>
                 </div>
                 <div className="py-2.5 flex justify-between">
                   <span className="text-slate-500">Active Detector</span>
-                  <span className="font-mono text-slate-900">{opStatus?.active_detector || 'VoiceShield-AASIST-Pretrained-v1'}</span>
+                  <span className="font-mono text-slate-900">{(opStatus?.active_detector ? opStatus.active_detector.replace(/VoiceShield/gi, 'Awaaz.exe') : 'Awaaz.exe-AASIST-Pretrained-v1')}</span>
                 </div>
                 <div className="py-2.5 flex justify-between">
                   <span className="text-slate-500">Environment</span>
@@ -584,7 +584,7 @@ export const OperationsDashboard: React.FC = () => {
                 <h3 className="font-bold text-sm text-slate-900 mb-2">Container Hardening (Dockerfile)</h3>
                 <ul className="space-y-1 text-xs text-slate-600 list-disc list-inside">
                   <li>Multi-stage build separating builder and minimal runtime</li>
-                  <li>Non-root execution under unprivileged user <code className="bg-slate-200 px-1 rounded font-mono">voiceshield (uid: 10001)</code></li>
+                  <li>Non-root execution under unprivileged user <code className="bg-slate-200 px-1 rounded font-mono">Awaaz.exe (uid: 10001)</code></li>
                   <li>Docker health check probing non-blocking <code className="bg-slate-200 px-1 rounded font-mono">/api/health/live</code></li>
                   <li>Minimal package surface excluding build tooling from final image</li>
                 </ul>

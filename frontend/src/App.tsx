@@ -67,7 +67,7 @@ export function App() {
         ...prev,
         status: 'offline',
         lastChecked: new Date(),
-        error: err.message || 'Failed to communicate with the VoiceShield backend.',
+        error: err.message || 'Failed to communicate with the Awaaz.exe backend.',
       }));
     } finally {
       setIsRefreshing(false);
@@ -95,7 +95,7 @@ export function App() {
               <div>
                 <h3 className="text-sm font-bold text-rose-300">Backend Connection Error</h3>
                 <p className="text-xs text-rose-400/90 mt-0.5">
-                  Unable to connect to VoiceShield API at{' '}
+                  Unable to connect to Awaaz.exe API at{' '}
                   <span className="font-mono underline">{API_BASE_URL}</span>. Make sure the backend service is running.
                 </p>
                 {state.error && (
@@ -127,7 +127,7 @@ export function App() {
             AI-Powered Real-Time Detection &amp; Prevention of Voice Cloning Attacks
           </h2>
           <p className="text-sm text-slate-400 max-w-2xl">
-            VoiceShield unifies pretrained AASIST synthetic voice detection, SpeechBrain ECAPA-TDNN biometric verification, acoustic prosody dynamics, and automated zero-trust fraud prevention workflows to neutralize voice cloning before sensitive transactions execute.
+            Awaaz.exe unifies pretrained AASIST synthetic voice detection, SpeechBrain ECAPA-TDNN biometric verification, acoustic prosody dynamics, and automated zero-trust fraud prevention workflows to neutralize voice cloning before sensitive transactions execute.
           </p>
         </section>
 
@@ -306,7 +306,7 @@ export function App() {
       </main>
 
       <footer className="border-t border-slate-900 bg-slate-950 px-6 py-4 text-center text-xs text-slate-600">
-        <p>VoiceShield Security Architecture • Step 15: Final Hackathon Product Integration &amp; Live Command Center</p>
+        <p>Awaaz.exe Security Architecture • Step 15: Final Hackathon Product Integration &amp; Live Command Center</p>
       </footer>
     </div>
   );

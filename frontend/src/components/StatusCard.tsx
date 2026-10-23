@@ -85,7 +85,7 @@ export const StatusCard: React.FC<StatusCardProps> = ({
             {health?.version ? `v${health.version}` : '—'}
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
-            {health?.service || 'VoiceShield API'}
+            {(health?.service ? health.service.replace(/VoiceShield/gi, 'Awaaz.exe') : 'Awaaz.exe API')}
           </p>
         </div>
 

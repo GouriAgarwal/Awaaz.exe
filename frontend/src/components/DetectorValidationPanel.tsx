@@ -138,7 +138,7 @@ export const DetectorValidationPanel: React.FC = () => {
               <p className="text-xs text-slate-400 max-w-2xl mx-auto mt-1 leading-relaxed">
                 The genuine pretrained AASIST model checkpoint (<code className="text-indigo-300 font-mono">AASIST.pth</code>, 297,866 parameters) is loaded and operational.
                 However, no local real-world benchmark dataset (e.g. ASVspoof 2019/2021 LA or In-the-Wild) has been executed on this installation.
-                In accordance with VoiceShield scientific integrity policies, placeholder metrics and fabricated accuracy numbers are strictly withheld.
+                In accordance with Awaaz.exe scientific integrity policies, placeholder metrics and fabricated accuracy numbers are strictly withheld.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 text-xs font-mono">
@@ -392,7 +392,7 @@ export const DetectorValidationPanel: React.FC = () => {
           </svg>
           <div>
             <span className="font-semibold text-blue-300">Scientific Integrity Commitment: </span>
-            A pretrained model is not equivalent to a VoiceShield-validated model. Model scores represent uncalibrated neural softmax outputs.
+            A pretrained model is not equivalent to an Awaaz.exe-validated model. Model scores represent uncalibrated neural softmax outputs.
             Formal certification requires verified benchmark evaluation on independent, disjoint speaker partitions.
           </div>
         </div>

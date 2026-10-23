@@ -161,8 +161,8 @@ export const SyntheticDetectionPanel: React.FC = () => {
               onChange={(e) => setSelectedDetector(e.target.value)}
               className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             >
-              <option value="aasist">VoiceShield-AASIST-v1 (Raw Waveform Graph)</option>
-              <option value="spec_cnn">VoiceShield-SpecCNN-v1 (Spectral ResNet)</option>
+              <option value="aasist">Awaaz.exe-AASIST-v1 (Raw Waveform Graph)</option>
+              <option value="spec_cnn">Awaaz.exe-SpecCNN-v1 (Spectral ResNet)</option>
               <option value="fallback">Fallback Heuristic (Acoustic Regularity)</option>
             </select>
           </div>
